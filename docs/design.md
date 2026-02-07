@@ -19,7 +19,7 @@ The architecture follows a client-server model with clear separation between pre
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     Client Layer (Browser)                   │
+│                     Client Layer (Browser)                  │
 │  ┌────────────────────────────────────────────────────────┐ │
 │  │  React.js + Vite + Tailwind CSS                        │ │
 │  │  - Voice Interface (Web Speech API)                    │ │
@@ -30,20 +30,20 @@ The architecture follows a client-server model with clear separation between pre
                             │ HTTPS/REST
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                   Application Layer (FastAPI)                │
+│                   Application Layer (FastAPI)               │
 │  ┌────────────────────────────────────────────────────────┐ │
 │  │  API Endpoints                                         │ │
 │  │  - Navigation Service                                  │ │
-│  │  - Symptom Mapping Service                            │ │
-│  │  - Doctor Schedule Service                            │ │
-│  │  - Prescription Processing Service                    │ │
-│  │  - Medicine Lookup Service                            │ │
+│  │  - Symptom Mapping Service                             │ │
+│  │  - Doctor Schedule Service                             │ │
+│  │  - Prescription Processing Service                     │ │
+│  │  - Medicine Lookup Service                             │ │
 │  └────────────────────────────────────────────────────────┘ │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │  Safety Layer (Middleware)                            │ │
-│  │  - AI Output Validation                               │ │
-│  │  - Medical Disclaimer Injection                       │ │
-│  │  - Content Filtering                                  │ │
+│  │  Safety Layer (Middleware)                             │ │
+│  │  - AI Output Validation                                │ │
+│  │  - Medical Disclaimer Injection                        │ │
+│  │  - Content Filtering                                   │ │
 │  └────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────┘
                             │
@@ -1453,3 +1453,4 @@ src/
 - Avoid brittle tests (don't test exact text, test patterns)
 - Maintain fast test execution (mock slow operations)
 - Keep tests independent (no shared state)
+
