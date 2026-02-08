@@ -21,6 +21,8 @@ This project follows a strict **Spec-Driven Development** approach. The complete
 
 * **🏥 Hospital Navigation:** Find departments and rooms with voice-guided directions.
 * **💊 Prescription Simplifier:** Upload a photo of a prescription to get a simplified explanation (No dosage advice).
+* **⏰ Medicine Reminders:** Manually set reminders for medicine timings and next doctor visits.
+* **🥗 Health Context Assistant:** Ask lifestyle/dietary questions (e.g., "Can I eat dates?") and get answers based on public health data with strict disclaimers.
 * **👨‍⚕️ Doctor Availability:** Check schedules, room numbers, and mock appointment tokens.
 * **🗣️ Voice-First Interface:** Designed for elderly and low-digital-literacy users (English & Hindi support).
 * **🛡️ Safety Layer:** A dedicated AI validation layer to prevent medical hallucinations and ensure safety.
