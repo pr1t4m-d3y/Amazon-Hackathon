@@ -85,7 +85,31 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. WHEN a medicine is not found in the database, THE HealthSathi_System SHALL display a message indicating no information is available
 5. THE HealthSathi_System SHALL show medicine information including typical uses and common side effects from publicly available sources
 
-### Requirement 6: Voice Interface
+### Requirement 6: Medicine Reminders & Follow-Ups
+
+**User Story:** As a patient with a busy schedule, I want to receive reminders for my medicine timings and follow-up visits, so that I do not miss my doses or appointments.
+
+#### Acceptance Criteria
+
+1. WHEN a User simplifies a prescription, THE HealthSathi_System SHALL allow the User to manually set reminders for the prescribed medicines
+2. THE HealthSathi_System SHALL NOT automatically schedule reminders from OCR text without explicit User confirmation of the time and frequency
+3. WHEN a reminder triggers, THE HealthSathi_System SHALL provide a notification (text or voice) indicating which medicine to take
+4. THE HealthSathi_System SHALL allow the User to set a "Next Visit" date for doctor follow-ups
+5. THE HealthSathi_System SHALL NOT provide dosage adjustments (e.g., "Take 2 pills if you missed one") in the reminders
+
+### Requirement 7: Health & Lifestyle Context Assistant (Diet & Safety)
+
+**User Story:** As a patient with a specific condition (e.g., diabetes), I want to ask simple lifestyle or dietary questions (e.g., "Can I eat dates?"), so that I can make informed choices based on general medical consensus.
+
+#### Acceptance Criteria
+
+1. WHEN a User asks a dietary question related to a condition (e.g., "Is jaggery good for diabetes?"), THE HealthSathi_System SHALL search publicly available medical consensus data to provide an answer
+2. THE HealthSathi_System SHALL structure answers as "General Information" (e.g., "Research suggests dates have a high glycemic index...") rather than direct medical orders
+3. WHEN answering lifestyle queries, THE HealthSathi_System SHALL append a specific disclaimer: "This is general information based on public health data. Please consult your doctor for your specific dietary needs."
+4. THE HealthSathi_System SHALL block queries that require immediate medical triage (e.g., "My chest hurts, what should I eat?") and direct the User to emergency services
+5. THE HealthSathi_System SHALL allow Users to optionally state their condition (e.g., "I am diabetic") to provide relevant context, without permanently storing this data unless consent is given
+
+### Requirement 8: Voice Interface
 
 **User Story:** As an elderly patient with limited digital literacy, I want to interact with the system using voice commands, so that I can access information without typing.
 
@@ -97,7 +121,7 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. THE HealthSathi_System SHALL support voice input in both English and Hindi languages
 5. WHEN reading simplified reports aloud, THE HealthSathi_System SHALL use clear pronunciation and appropriate pacing for comprehension
 
-### Requirement 7: Data Privacy and Security
+### Requirement 9: Data Privacy and Security
 
 **User Story:** As a patient concerned about privacy, I want my health data to be processed securely without unauthorized storage, so that my medical information remains confidential.
 
@@ -109,7 +133,7 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. WHEN a User session ends, THE HealthSathi_System SHALL clear all temporary health data from memory
 5. THE HealthSathi_System SHALL comply with applicable data protection regulations for health information
 
-### Requirement 8: Safety Constraints and Medical Disclaimers
+### Requirement 10: Safety Constraints and Medical Disclaimers
 
 **User Story:** As a healthcare administrator, I want the system to never provide medical advice or diagnosis, so that we avoid legal liability and ensure patient safety.
 
@@ -121,7 +145,7 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. WHEN the Safety_Layer detects medical advice or diagnostic content, THE HealthSathi_System SHALL block the output and log the incident
 5. THE HealthSathi_System SHALL display a prominent disclaimer on the home page stating the system is for informational purposes only
 
-### Requirement 9: Mobile-First Responsive Interface
+### Requirement 11: Mobile-First Responsive Interface
 
 **User Story:** As a patient using a mobile phone in the hospital, I want the interface to work smoothly on my device, so that I can access information on the go.
 
@@ -133,7 +157,7 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. THE HealthSathi_System SHALL maintain readability with appropriate font sizes and contrast ratios on mobile screens
 5. WHEN a User rotates their device, THE HealthSathi_System SHALL adapt the layout to portrait or landscape orientation
 
-### Requirement 10: Multi-Language Support
+### Requirement 12: Multi-Language Support
 
 **User Story:** As a patient who speaks Hindi, I want to interact with the system in my preferred language, so that I can understand information clearly.
 
@@ -145,7 +169,7 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. WHEN voice input is used, THE HealthSathi_System SHALL detect and process the spoken language (English or Hindi)
 5. THE HealthSathi_System SHALL display the Medical_Disclaimer in the User's selected language
 
-### Requirement 11: System Performance and Reliability
+### Requirement 13: System Performance and Reliability
 
 **User Story:** As a hospital administrator, I want the system to respond quickly and reliably, so that patients receive timely assistance.
 
@@ -157,7 +181,7 @@ The system is strictly assistive and informational. It does not provide diagnosi
 4. THE HealthSathi_System SHALL maintain 99% uptime during hospital operating hours
 5. WHEN system load is high, THE HealthSathi_System SHALL queue requests and display estimated wait times to Users
 
-### Requirement 12: Error Handling and User Feedback
+### Requirement 14: Error Handling and User Feedback
 
 **User Story:** As a user encountering an error, I want to receive clear feedback about what went wrong, so that I can take corrective action.
 
