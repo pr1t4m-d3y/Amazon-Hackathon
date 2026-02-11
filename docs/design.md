@@ -147,11 +147,6 @@ interface SimplifiedPrescription {
 
 **4. DoctorSchedule Component**
 ```typescript
-interface DoctorScheduleProps {
-  doctors: Doctor[];
-  onBookToken: (doctorId: string) => void;
-}
-
 interface Doctor {
   id: string;
   name: string;
@@ -159,12 +154,7 @@ interface Doctor {
   roomNumber: string;
   schedule: TimeSlot[];
   availability: 'Available' | 'Busy' | 'Off-duty';
-}
-
-interface TimeSlot {
-  day: string;
-  startTime: string;
-  endTime: string;
+  nextAvailableSlot: string | null; // e.g., "Today 14:00" or "Tomorrow 09:00"
 }
 ```
 
@@ -242,6 +232,12 @@ Response:
   ],
   "disclaimer": "This is not a diagnosis. Please consult a doctor."
 }
+
+# Logic Note:
+# IF no matching department is found in database:
+#   RETURN department: "General Medicine"
+#   RETURN reason: "General assessment required for unspecified symptoms."
+
 ```
 
 **3. Doctor Schedule Endpoints**
@@ -339,9 +335,54 @@ Response:
   "language": "en"
 }
 ```
+**6. Reminder & Follow-up Endpoints**
+```python
+POST /reminders/set
+Request:
+{
+  "medicine_name": "Metformin",
+  "time": "08:00",
+  "frequency": "daily"
+}
+Response:
+{
+  "status": "success",
+  "reminder_id": "rem_123",
+  "message": "Reminder set for 08:00 daily"
+}
 
-**6. Health Check Endpoint**
+POST /follow-up/set
+Request:
+{
+  "doctor_id": "doc_123",
+  "date": "2024-02-20",
+  "notes": "Bring blood test report"
+}
+Response:
+{
+  "status": "success",
+  "visit_id": "visit_456",
+  "message": "Follow-up scheduled for Feb 20, 2024"
+}
+```
+**7. Diet & Lifestyle Context Endpoints**
+```python
+POST /context/query
+Request:
+{
+  "query": "Is jaggery good for diabetes?",
+  "user_condition": "diabetes", 
+  "language": "en"
+}
 
+Response:
+{
+  "answer": "Research suggests jaggery has a high glycemic index and can spike blood sugar levels similarly to sugar...",
+  "type": "general_info",
+  "disclaimer": "This is general information based on public health data. Please consult your doctor for your specific dietary needs."
+}
+```
+**8. Health Check Endpoint**
 ```python
 GET /health
 Response:
@@ -514,7 +555,29 @@ CREATE TABLE appointment_tokens (
     UNIQUE(doctor_id, token_number, DATE(created_at))
 );
 ```
-
+**10. User Reminders Table**
+```sql
+CREATE TABLE user_reminders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    session_id VARCHAR(100) REFERENCES user_consents(session_id),
+    medicine_name VARCHAR(200) NOT NULL,
+    reminder_time TIME NOT NULL,
+    frequency VARCHAR(50), -- e.g., 'daily', 'weekly'
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+**11. Follow-up Visits Table**
+```sql
+CREATE TABLE follow_up_visits (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    session_id VARCHAR(100) REFERENCES user_consents(session_id),
+    doctor_id UUID REFERENCES doctors(id),
+    visit_date DATE NOT NULL,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 ### Python Data Models (Pydantic)
 
 ```python
@@ -1453,4 +1516,5 @@ src/
 - Avoid brittle tests (don't test exact text, test patterns)
 - Maintain fast test execution (mock slow operations)
 - Keep tests independent (no shared state)
+
 
